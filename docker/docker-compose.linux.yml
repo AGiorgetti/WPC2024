@@ -1,0 +1,9 @@
+# Root Docker Compose file to run the tests on the development machine using empty databases
+# It must be used with powershell actions that initialize the required databases with test data.
+
+services:
+  mongo:
+    platform: linux
+    image: mongo
+    ports:
+      - "27017:27017"

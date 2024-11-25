@@ -1,0 +1,113 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build AkkaWeatherStation",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Akka/AkkaWeatherStation/AkkaWeatherStation.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build AkkaWeatherCollector",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Akka/AkkaWeatherCollector/AkkaWeatherCollector.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build OrleansWeatherCollector",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Orleans/OrleansWeatherCollector/OrleansWeatherCollector.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build OrleansWeatherStation",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Orleans/OrleansWeatherStation/OrleansWeatherStation.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build DaprWeatherCollector",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Dapr/DaprWeatherCollector/DaprWeatherCollector.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build DaprWeatherStation",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Dapr/DaprWeatherStation/DaprWeatherStation.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "MongoDb",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/docker/DockerComposeUp.ps1",
+                "linux"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/docker"
+            },
+            "problemMatcher": []
+        },
+        {
+            "appId": "collector",
+            "appPort": 5296,
+            "httpPort": 52960,
+            "grpcPort": 52961,
+            "metricsPort": 52962,
+            "label": "dapr-debug-collector",
+            "type": "daprd",
+            "dependsOn": "build DaprWeatherCollector",
+            "resourcesPath": "./src/Dapr/resources"
+        },
+        {
+            "appId": "collector",
+            "label": "daprd-down-collector",
+            "type": "daprd-down"
+        },
+        {
+            "appId": "station",
+            "appPort": 5297,
+            "httpPort": 52970,
+            "grpcPort": 52971,
+            "metricsPort": 52972,
+            "label": "dapr-debug-station",
+            "type": "daprd",
+            "dependsOn": "build DaprWeatherStation",
+            "resourcesPath": "./src/Dapr/resources"
+        },
+        {
+            "appId": "station",
+            "label": "daprd-down-station",
+            "type": "daprd-down"
+        }
+    ]
+}

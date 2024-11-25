@@ -1,0 +1,94 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "AkkaWeatherCollector",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/Akka/AkkaWeatherCollector/bin/Debug/net9.0/AkkaWeatherCollector.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Akka/AkkaWeatherCollector",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "preLaunchTask": "build AkkaWeatherCollector"
+        },
+        {
+            "name": "AkkaWeatherStation",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/Akka/AkkaWeatherStation/bin/Debug/net9.0/AkkaWeatherStation.dll",
+            "args": [
+                "station1",
+                "rome"
+            ],
+            "cwd": "${workspaceFolder}/src/Akka/AkkaWeatherStation",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "preLaunchTask": "build AkkaWeatherStation"
+        },
+        {
+            "name": "OrleansWeatherCollector",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/Orleans/OrleansWeatherCollector/bin/Debug/net9.0/OrleansWeatherCollector.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Orleans/OrleansWeatherCollector",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "preLaunchTask": "build OrleansWeatherCollector"
+        },
+        {
+            "name": "OrleansWeatherStation",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/Orleans/OrleansWeatherStation/bin/Debug/net9.0/OrleansWeatherStation.dll",
+            "args": [
+                "station1",
+                "rome"
+            ],
+            "cwd": "${workspaceFolder}/src/Orleans/OrleansWeatherStation",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "preLaunchTask": "build OrleansWeatherStation"
+        },
+        {
+            "name": "DaprWeatherCollector",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dapr-debug-collector",
+            "program": "${workspaceFolder}/src/Dapr/DaprWeatherCollector/bin/Debug/net9.0/DaprWeatherCollector.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Dapr/DaprWeatherCollector",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "postDebugTask": "daprd-down-collector",
+            "env": {
+                "DAPR_HTTP_PORT": "52960",
+                "DAPR_GRPC_PORT": "52961"
+            }
+        },
+        {
+            "name": "DaprWeatherStation",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dapr-debug-station",
+            "program": "${workspaceFolder}/src/Dapr/DaprWeatherStation/bin/Debug/net9.0/DaprWeatherStation.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Dapr/DaprWeatherStation",
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+            "postDebugTask": "daprd-down-station",
+            "env": {
+                "DAPR_HTTP_PORT": "52970",
+                "DAPR_GRPC_PORT": "52971"
+            }
+        },
+        {
+            "name": "C#: AkkaWeatherStation",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}\\src\\Akka\\AkkaWeatherStation\\AkkaWeatherStation.csproj",
+            "launchConfigurationId": "TargetFramework=;AkkaWeatherStation"
+        }
+    ]
+}
